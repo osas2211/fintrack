@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Timmana } from "next/font/google"
+import { Geist_Mono, Timmana, Public_Sans } from "next/font/google"
 import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const publicSans = Public_Sans({
+  variable: "--font-public-sans",
   subsets: ["latin"],
 })
 
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${timmana.variable} antialiased overflow-x-hidden text-[#1B2528]`}
+        className={`${publicSans.variable} ${geistMono.variable} ${timmana.variable} antialiased overflow-x-hidden text-[#1B2528]`}
       >
         {children}
       </body>
