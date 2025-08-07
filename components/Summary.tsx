@@ -32,7 +32,7 @@ export const SummaryCard = ({
   percent: string
 }) => {
   return (
-    <div className="bg-[#34616F]/9 rounded-xl md:p-7 p-4 space-y-[18px]">
+    <div className="bg-[#34616F]/9 rounded-2xl md:p-7 p-4 space-y-[18px]">
       <div className="flex items-center justify-between gap-2">
         <p className="text-sm md:text-[17px] font-bold">{title}</p>
         <BsThreeDots />

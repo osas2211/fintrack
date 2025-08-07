@@ -30,6 +30,11 @@ export const Dashboard = () => {
         </div>
       </div>
 
+      <div className="flex items-center gap-3 text-[#15272D]/62 py-2">
+        <img src={"/users-group.png"} />
+        <p>Ava, Liam, Noah +12 others</p>
+      </div>
+
       <div>
         <Tabs default_active="Overview" items={dashboardTabs} />
       </div>

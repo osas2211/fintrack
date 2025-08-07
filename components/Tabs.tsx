@@ -31,14 +31,14 @@ export const Tabs: React.FC<TabsProps> = ({
             }}
             className={`px-4 py-2 bg-transparent cursor-pointer border-b-2 ${
               active === item.label
-                ? "border-[#437D8E] text-[#437D8E] font-semibold"
+                ? "border-[#4B8B9F] text-[#437D8E] font-semibold"
                 : "border-transparent text-[#15272D]/60"
             }`}
           >
             {item.label}
           </button>
         ))}
-        <div className="absolute bottom-0 left-0 h-[2px] w-full bg-[#15272D]/20" />
+        <div className="absolute bottom-0 left-0 h-[2px] w-full bg-[#15272D]/15" />
       </div>
       <div className="mt-7">
         {items.find((item) => item.label === active)?.component}
