@@ -7,7 +7,7 @@ import { Avatar } from "./Avatar"
 
 export const Header = () => {
   return (
-    <div className="py-4 md:py-6 flex items-center justify-between">
+    <div className="py-4 md:py-6 flex items-center justify-between sticky bg-[#FCFDFD] top-0 left-0 z-50">
       <div className="flex items-center gap-[26px]">
         <IoMdMenu size={24} className="cursor-pointer" />
         <div className="text-[#437D8E] flex items-center gap-2">

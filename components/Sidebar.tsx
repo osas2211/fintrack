@@ -11,7 +11,7 @@ const routes: { path: string; label: string }[] = [
 
 export const Sidebar = () => {
   return (
-    <aside className="md:w-[320px]">
+    <aside className="md:w-[320px] sticky bg-[#FCFDFD] top-[7.5rem] left-0 h-[400px]">
       <ul>
         {routes.map(({ path, label }, index) => {
           return (
