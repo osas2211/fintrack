@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 
-type statusT = "active" | "credit" | "debit"
+type statusT = "active" | "Credit" | "Debit"
 
 export const Status = ({ status }: { status: statusT }) => {
   return (
@@ -13,7 +13,7 @@ export const Status = ({ status }: { status: statusT }) => {
         style={{
           width: 6,
           height: 6,
-          background: status === "debit" ? "#C6381B" : "#087A2E",
+          background: status === "Debit" ? "#C6381B" : "#087A2E",
         }}
       />
       <p>{status}</p>
