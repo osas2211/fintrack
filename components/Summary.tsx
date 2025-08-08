@@ -1,6 +1,9 @@
 "use client"
 import React from "react"
 import { BsThreeDots } from "react-icons/bs"
+import { TransactionTable } from "./TransactionsTable"
+import { transactions } from "@/data/transactions"
+import { TableSkeletonLoader } from "./TableSkeletonLoader"
 
 const summary_data = [
   { title: "Total Balance", value: "$12,345", percent: "+5%" },
@@ -17,6 +20,10 @@ export const Summary = () => {
         {summary_data.map((data, index) => {
           return <SummaryCard key={index} {...data} />
         })}
+      </div>
+      <div className="my-7">
+        <TransactionTable transactions={transactions} />
+        {/* <TableSkeletonLoader /> */}
       </div>
     </div>
   )
