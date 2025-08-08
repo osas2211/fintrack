@@ -27,3 +27,11 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+.sidebar {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+@media (max-width: 768px) {
+  .sidebar {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+  }
+}
