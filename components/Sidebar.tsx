@@ -11,7 +11,10 @@ const routes: { path: string; label: string }[] = [
 
 export const Sidebar = () => {
   return (
-    <aside className="md:w-[320px] sticky bg-[#FCFDFD] top-[7.5rem] left-0 h-[400px]">
+    <aside
+      className="md:w-[320px] md:sticky fixed bg-[#FCFDFD] md:top-[7.5rem] top-[4.5rem] left-0 md:h-[400px] w-full h-[95vh] z-[30] md:p-0 p-4 sidebar"
+      style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}
+    >
       <ul>
         {routes.map(({ path, label }, index) => {
           return (

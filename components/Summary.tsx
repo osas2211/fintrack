@@ -26,7 +26,7 @@ export const Summary = () => {
   return (
     <div>
       <p className="text-xl font-semibold mt-3 mb-[18px]">Summary</p>
-      <div className="grid grid-cols-4 gap-7">
+      <div className="grid md:grid-cols-4 grid-cols-2 xl:gap-7 gap-4">
         <SummaryCard
           title="Total Balance"
           value={valueInCurrency(summary_data.totalBalance)}
@@ -65,13 +65,15 @@ export const SummaryCard = ({
   percent: number
 }) => {
   return (
-    <div className="bg-[#34616F]/9 rounded-2xl md:p-7 p-4 space-y-[18px]">
+    <div className="bg-[#34616F]/9 rounded-2xl xl:p-7 p-4 space-y-[18px]">
       <div className="flex items-center justify-between gap-2">
-        <p className="text-sm md:text-[17px] font-bold">{title}</p>
+        <p className="text-sm xl:text-[17px] font-bold">{title}</p>
         <BsThreeDots />
       </div>
       <div>
-        <h2 className="md:text-[34px] text-lg font-bold">{value}</h2>
+        <h2 className="xl:text-[34px] md:text-2xl text-lg font-bold">
+          {value}
+        </h2>
         <p
           className={`${
             percent < 0 ? "text-red-500" : "text-primary"

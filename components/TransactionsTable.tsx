@@ -33,9 +33,9 @@ export const TransactionTable = () => {
               active={params.order === "desc"}
               order={params.order!}
               onClick={() => toggleSort("date")}
-              width="w-[40%]"
+              width="md:w-[40%] w-[40%]"
             />
-            <th className="py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer hover:bg-[#49656E]/5 px-1 w-[20%]">
+            <th className="py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer hover:bg-[#49656E]/5 px-1 md:w-[20%] w-[40%]">
               <p>Remark</p>
               {/* <BiCaretDown /> */}
             </th>
@@ -44,9 +44,9 @@ export const TransactionTable = () => {
               active={params.sort === "amount"}
               order={params.order!}
               onClick={() => toggleSort("amount")}
-              width="w-[10%]"
+              width="md:w-[10%] w-[20%]"
             />
-            <th className="py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer hover:bg-[#49656E]/5 px-1 w-[10%]">
+            <th className="py-2 md:py-[8px] md:inline-flex hidden items-center gap-2  cursor-pointer hover:bg-[#49656E]/5 px-1 md:w-[10%] w-[20%] ">
               <p>Currency</p>
               {/* <BiCaretDown /> */}
             </th>
@@ -93,16 +93,16 @@ export const TransactionTable = () => {
           {data?.map((tx) => (
             <tr
               key={tx.id}
-              className="flex justify-between gap-[18px] text-[15px]"
+              className="flex justify-between gap-[18px] md:text-[15px] text-sm"
             >
-              <td className="py-2 md:py-[18px] border-t-[1px] border-[#49656E]/20 w-[40%]">
+              <td className="py-2 md:py-[18px] border-t-[1px] border-[#49656E]/20 md:w-[40%] w-[40%]">
                 {tx.date}
               </td>
-              <td className="py-2 md:py-[18px] border-t-[1px] border-[#49656E]/20 w-[20%]">
+              <td className="py-2 md:py-[18px] border-t-[1px] border-[#49656E]/20 md:w-[20%] w-[40%]">
                 {tx.remark}
               </td>
               <td
-                className={`py-2 md:py-[18px] border-t-[1px] border-[#49656E]/20 w-[10%] `}
+                className={`py-2 md:py-[18px] border-t-[1px] border-[#49656E]/20 md:w-[10%] w-[20%] `}
               >
                 {Intl.NumberFormat("en-US", {
                   currency: "USD",
@@ -110,10 +110,10 @@ export const TransactionTable = () => {
                   trailingZeroDisplay: "stripIfInteger",
                 }).format(tx.amount)}
               </td>
-              <td className="py-2 md:py-[18px] border-t-[1px] border-[#49656E]/20 w-[10%]">
+              <td className="py-2 md:py-[18px] md:block hidden border-t-[1px] border-[#49656E]/20 md:w-[10%] w-[20%]">
                 {tx.currency}
               </td>
-              <td className="py-2 md:py-[18px] border-t-[1px] border-[#49656E]/20 w-[10%]">
+              <td className="py-2 md:py-[18px] border-t-[1px] border-[#49656E]/20 md:w-[10%] w-[20%]">
                 <Status status={tx.type} />
               </td>
             </tr>

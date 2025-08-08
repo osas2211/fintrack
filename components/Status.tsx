@@ -16,7 +16,7 @@ export const Status = ({ status }: { status: statusT }) => {
           background: status === "Debit" ? "#C6381B" : "#087A2E",
         }}
       />
-      <p>{status}</p>
+      <p className="md:text-[15px] text-xs">{status}</p>
     </div>
   )
 }
