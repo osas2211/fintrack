@@ -2,8 +2,6 @@
 import React from "react"
 import { BsThreeDots } from "react-icons/bs"
 import { TransactionTable } from "./TransactionsTable"
-import { transactions } from "@/data/transactions"
-import { TableSkeletonLoader } from "./TableSkeletonLoader"
 import { DashboardSummary } from "@/types"
 
 const summary_data: DashboardSummary = {
@@ -51,8 +49,7 @@ export const Summary = () => {
         />
       </div>
       <div className="my-7">
-        <TransactionTable transactions={transactions} />
-        {/* <TableSkeletonLoader /> */}
+        <TransactionTable />
       </div>
     </div>
   )

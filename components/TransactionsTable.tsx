@@ -1,52 +1,94 @@
 import React from "react"
-import { BiCaretDown } from "react-icons/bi"
+import { BiCaretDown, BiCaretUp } from "react-icons/bi"
 import { Status } from "./Status"
+import { useTransactions } from "@/hooks/useTransactions"
+import { useTransactionsQuery } from "@/context/TransactionsQueryContext"
+import { TableSkeletonLoader } from "@/components/TableSkeletonLoader"
+import { Popover } from "./Popover"
 
-export interface Transaction {
-  id: string
-  date: string
-  remark: string
-  amount: number
-  currency: string
-  type: "Credit" | "Debit"
-}
+export const TransactionTable = () => {
+  const { params, setParams } = useTransactionsQuery()
+  const { data, isLoading, isError } = useTransactions(params)
 
-interface TransactionTableProps {
-  transactions: Transaction[]
-}
+  const toggleSort = (key: "date" | "amount") => {
+    setParams((p) => {
+      const sameKey = p.sort === key
+      const nextOrder = sameKey && p.order === "asc" ? "desc" : "asc"
+      return { ...p, sort: key, order: nextOrder }
+    })
+  }
 
-export const TransactionTable: React.FC<TransactionTableProps> = ({
-  transactions,
-}) => {
+  if (isLoading) return <TableSkeletonLoader />
+  if (isError)
+    return <div className="p-4 text-red-600">Failed to load transactions.</div>
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full !flex !flex-col">
         <thead className="w-full">
           <tr className=" text-[#15272D]/62 !font-normal text-[13px] flex items-center justify-between gap-[18px] w-full">
-            <th className="py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer w-[40%]">
-              <p>Date</p>
-              <BiCaretDown />
-            </th>
-            <th className="py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer w-[20%]">
+            <ThButton
+              label="Date"
+              active={params.order === "desc"}
+              order={params.order!}
+              onClick={() => toggleSort("date")}
+              width="w-[40%]"
+            />
+            <th className="py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer hover:bg-[#49656E]/5 px-1 w-[20%]">
               <p>Remark</p>
-              <BiCaretDown />
+              {/* <BiCaretDown /> */}
             </th>
-            <th className="py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer w-[10%]">
-              <p>Amount</p>
-              <BiCaretDown />
-            </th>
-            <th className="py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer w-[10%]">
+            <ThButton
+              label="Amount"
+              active={params.sort === "amount"}
+              order={params.order!}
+              onClick={() => toggleSort("amount")}
+              width="w-[10%]"
+            />
+            <th className="py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer hover:bg-[#49656E]/5 px-1 w-[10%]">
               <p>Currency</p>
-              <BiCaretDown />
+              {/* <BiCaretDown /> */}
             </th>
-            <th className="py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer w-[10%]">
-              <p>Type</p>
-              <BiCaretDown />
-            </th>
+            <Popover
+              anchor={
+                <div className="inline-flex items-center gap-2">
+                  <p>Type</p>
+                  <BiCaretDown />
+                </div>
+              }
+            >
+              <div>
+                <button
+                  className={`${
+                    params.type === "Credit" ? "bg-gray-100" : ""
+                  } w-full hover:bg-gray-100 p-1 text-start mb-2`}
+                  onClick={() =>
+                    setParams((prev) => ({
+                      ...prev,
+                      type: params.type === "Credit" ? "All" : "Credit",
+                    }))
+                  }
+                >
+                  Credit
+                </button>
+                <button
+                  className={`${
+                    params.type === "Debit" ? "bg-gray-100" : ""
+                  } w-full hover:bg-gray-100 p-1 text-start`}
+                  onClick={() =>
+                    setParams((prev) => ({
+                      ...prev,
+                      type: params.type === "Debit" ? "All" : "Debit",
+                    }))
+                  }
+                >
+                  Debit
+                </button>
+              </div>
+            </Popover>
           </tr>
         </thead>
         <tbody className="">
-          {transactions.map((tx) => (
+          {data?.map((tx) => (
             <tr
               key={tx.id}
               className="flex justify-between gap-[18px] text-[15px]"
@@ -77,5 +119,37 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
         </tbody>
       </table>
     </div>
+  )
+}
+
+const ThButton = ({
+  label,
+  active,
+  order,
+  onClick,
+  width,
+}: {
+  label: string
+  active: boolean
+  order: "asc" | "desc"
+  onClick: () => void
+  width: string
+}) => {
+  return (
+    <th className={`${width}`}>
+      <button
+        onClick={onClick}
+        className={`py-2 md:py-[8px] inline-flex items-center gap-2  cursor-pointer hover:bg-[#49656E]/5 px-1 w-full ${
+          active ? "bg-[#49656E]/5" : ""
+        }`}
+      >
+        <span>{label}</span>
+        {
+          <span className="">
+            {order === "desc" ? <BiCaretUp /> : <BiCaretDown />}
+          </span>
+        }
+      </button>
+    </th>
   )
 }
