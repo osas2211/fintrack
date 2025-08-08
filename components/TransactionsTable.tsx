@@ -5,6 +5,7 @@ import { useTransactions } from "@/hooks/useTransactions"
 import { useTransactionsQuery } from "@/context/TransactionsQueryContext"
 import { TableSkeletonLoader } from "@/components/TableSkeletonLoader"
 import { Popover } from "./Popover"
+import { EmptyState } from "./Empty"
 
 export const TransactionTable = () => {
   const { params, setParams } = useTransactionsQuery()
@@ -19,6 +20,7 @@ export const TransactionTable = () => {
   }
 
   if (isLoading) return <TableSkeletonLoader />
+  if (data?.length === 0) return <EmptyState message="No transactions found." />
   if (isError)
     return <div className="p-4 text-red-600">Failed to load transactions.</div>
   return (

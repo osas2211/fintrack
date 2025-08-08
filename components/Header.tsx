@@ -2,10 +2,14 @@
 import React from "react"
 import { Logo } from "./Logo"
 import { IoMdMenu } from "react-icons/io"
-import { CiSearch, CiGrid41 } from "react-icons/ci"
+import { CiGrid41 } from "react-icons/ci"
 import { Avatar } from "./Avatar"
+import { Search } from "./Search"
+import { useTransactionsQuery } from "@/context/TransactionsQueryContext"
 
 export const Header = () => {
+  const { setParams } = useTransactionsQuery()
+
   return (
     <div className="py-4 md:py-6 flex items-center justify-between sticky bg-[#FCFDFD] top-0 left-0 z-50">
       <div className="flex items-center gap-[26px]">
@@ -20,7 +24,12 @@ export const Header = () => {
         </div>
       </div>
       <div className="flex items-center gap-6">
-        <CiSearch size={24} className="cursor-pointer" />
+        <Search
+          placeholder="Search by Tx remarks..."
+          onSearch={(value) =>
+            setParams((prev) => ({ ...prev, search: value }))
+          }
+        />
         <CiGrid41 size={24} className="cursor-pointer" />
         <Avatar size={40} src="/profile.png" />
       </div>
